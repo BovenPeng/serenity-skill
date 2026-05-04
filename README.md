@@ -1,159 +1,181 @@
 # Serenity.skill
 
-**Turn your investment agent into a supply-chain bottleneck hunter.**
+## 让 AI 用 Serenity 式投研方法，筛出上涨逻辑更清楚的股票和基金方向
 
-Give it a market theme. It investigates live sources, maps the value chain, finds scarce constraints, ranks public-company research priorities, and writes the strongest reasons the idea could fail before you chase the story.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-SKILL.md-black)](SKILL.md)
+[![中文优先](https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87%E4%BC%98%E5%85%88-red)](README.md)
+[![English](https://img.shields.io/badge/English-README.en.md-lightgrey)](README.en.md)
 
-[中文 README](README.zh-CN.md)
+看到 AI 半导体、机器人、CPO、算力、电力设备、创新药这些热点，很多人只知道“好像很火”，却很难判断该看哪条产业链、哪类公司、哪只股票、哪个基金方向。
+
+Serenity.skill 把 Serenity / `@aleabitoreddit` 公开内容中可观察到的投研路径做成 Agent Skill：从热点出发，拆产业链，找供应链瓶颈，筛候选公司和基金方向，检查公告、财报、客户、产能和风险，最后给出一份“值得优先研究”的机会清单。
 
 ```text
-market story -> system change -> required parts -> supply-chain layers
--> scarce constraints -> public companies -> evidence -> repricing path
--> what could prove the idea wrong
+热点主题 -> 产业链拆解 -> 关键瓶颈 -> 候选股票/基金
+-> 证据链 -> 风险清单 -> 优先研究排序
 ```
 
-## What It Does
+它适合面对热点信息流、希望建立系统筛选流程的投资者：让 AI 先完成第一轮深度研究，把模糊热度变成有逻辑、有证据、有风险边界的研究方向。
 
-Serenity.skill is an Agent Skill for tool-using investment research agents.
+> Research support only. Serenity.skill 负责研究、排序和推理；最终买卖决策由你自己决定。
 
-It helps an agent move from broad market narratives to evidence-backed research priorities:
+## 为什么是 Serenity 式方法
 
-- Deep theme research across AI infrastructure, semiconductors, CPO, advanced packaging, power equipment, robotics, materials, testing, and other supply-chain-heavy sectors.
-- Cross-market candidate discovery for US, Hong Kong, A-share, Taiwan, Japan, Korea, and Europe.
-- Single-company thesis challenges: exact chain position, evidence quality, customer dependence, substitution risk, financing risk, and what the market may be missing.
-- Research partner conversations that push ideas from story to proof.
-- Local scoring through a standard-library Python scorecard.
+Serenity / `@aleabitoreddit` 在公开内容中长期围绕 AI、半导体、光通信、机器人等科技主题做供应链研究。他的核心思路可以概括为一句话：大行情里真正有价值的机会，常常藏在系统扩张时最难绕开的关键环节。
 
-The Skill works best when the host agent has web search, browser, filings, market-data, and Python access. Local scripts use only local inputs.
+Serenity.skill 复用的是这套公开方法论中的研究路径：
 
-## Quick Start
+- 从大热点开始，先问“真实需求来自哪里”。
+- 把主题拆成下游需求、系统集成、芯片/器件、设备、材料、封测、基础设施。
+- 找低供应商数量、长验证周期、扩产困难、客户认证严格、材料纯度要求高的环节。
+- 再回到股票和基金方向，判断谁更靠近真实瓶颈，谁主要只是蹭主题。
+- 最后检查公告、财报、问询函、订单、产能、客户和风险，给出优先研究排序。
 
-### Codex / OpenAI Agent Skills / Generic Agent Skills Clients
+这个仓库做的是公开资料研究工具。它吸收 Serenity 式研究的结构化思路，同时要求所有公司判断回到公告、交易所文件、财报、电话会、监管/项目文件、专利、标准、可信媒体和专业分析。
 
-User-level install:
+## 它能帮你做什么
 
-```bash
-mkdir -p ~/.agents/skills
-cp -R serenity-skill ~/.agents/skills/serenity-skill
+| 你现在遇到的问题 | 可以这样问 AI | Serenity.skill 会帮你看什么 |
+|---|---|---|
+| 刷到一个热点，感觉全网都在说，自己不知道从哪下手 | `最近 AI 半导体很火，普通人应该先研究哪些方向？` | 先拆产业链，再把更接近真实需求和扩产瓶颈的方向排出来 |
+| 想买机器人方向，分不清整机、零部件、减速器、传感器谁更关键 | `机器人产业链里，哪些环节更可能先出机会？` | 比较不同环节的供需紧张度、竞争格局和证据强弱 |
+| 看到别人推荐一只股票，担心它只是蹭热点 | `帮我挑战这家公司是不是 CPO 核心供应商` | 查它在产业链里的真实位置、客户证据、收入质量和主要风险 |
+| 想买主题基金或 ETF，分不清哪个细分方向更值得看 | `机器人主题基金应该重点看哪些上游环节？` | 找基金背后的核心受益链条，提示需要核验的持仓方向 |
+| 手里有几只候选股，想让 AI 帮你排个研究顺序 | `比较 A、B、C 三家公司，谁的上涨逻辑更清楚？` | 按产业链位置、证据强度、估值压力、风险点做优先级排序 |
+| 每天刷消息很焦虑，想建立一套固定筛选流程 | `带我学 Serenity 式产业链研究，每次只问我一个问题` | 从热点、需求、卡点、证据、风险一步步建立研究框架 |
+
+## 直接复制这个 Prompt
+
+```text
+用 serenity-skill 深度调研现在 A 股 AI 半导体产业链。
+请联网查公告、财报、问询函、互动易、招投标、环评/能评、专利、客户认证和财务质量，
+先排产业链层级，再找 5 个最值得优先研究的标的，
+并说明卡住的环节、产业链位置、证据、排序理由和主要风险。
 ```
 
-Project-level install:
+```text
+用 serenity-skill 帮我研究最近机器人方向。
+先拆产业链，再判断哪些环节更接近真实供需瓶颈，
+最后给出股票和基金方向的优先研究清单。
+```
+
+```text
+用 serenity-skill 挑战 [公司/股票代码]。
+它到底卡在哪一层？证据够不够？市场可能高估了什么？
+什么情况说明这个判断应该降级？
+```
+
+更多可复制模板见 [assets/research-prompt-pack.md](assets/research-prompt-pack.md)。
+
+## 输出长什么样
+
+```text
+先看带宽和工艺约束，再看纯算力芯片。
+
+AI 需求继续扩张时，先紧起来的往往是内存互连、CMP/减薄、
+刻蚀和耗材这些决定供给能不能爬坡的环节。
+
+我会把优先级放在：
+1. 内存互连芯片
+2. CMP/减薄设备
+3. 关键刻蚀设备
+4. CMP/电镀耗材
+5. 先进封测
+
+纯 AI 芯片和光模块业绩弹性强，但估值和拥挤度更高，
+更适合作为景气度温度计。
+```
+
+完整示例：
+
+- [A 股 AI 半导体扫描](examples/a-share-ai-semiconductor-demo.md)
+- [AI 基建瓶颈研究](examples/ai-infrastructure-chokepoint-demo.md)
+- [研究伙伴式对话](examples/demo-conversation.md)
+
+## 安装
+
+### Codex / OpenAI Agent Skills / 通用 Agent Skills 客户端
+
+用户级安装：
 
 ```bash
-mkdir -p .agents/skills
-cp -R serenity-skill .agents/skills/serenity-skill
+SKILL_DIR="$HOME/.agents/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
+```
+
+项目级安装：
+
+```bash
+SKILL_DIR=".agents/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
 ### Claude Code
 
-User-level install:
+用户级安装：
 
 ```bash
-mkdir -p ~/.claude/skills
-cp -R serenity-skill ~/.claude/skills/serenity-skill
+SKILL_DIR="$HOME/.claude/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
-Project-level install:
+项目级安装：
 
 ```bash
-mkdir -p .claude/skills
-cp -R serenity-skill .claude/skills/serenity-skill
+SKILL_DIR=".claude/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
 ### Hermes Agent
 
 ```bash
-mkdir -p ~/.hermes/skills/research
-cp -R serenity-skill ~/.hermes/skills/research/serenity-skill
+SKILL_DIR="$HOME/.hermes/skills/research/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
-### OpenClaw / Other AgentSkills-Compatible Clients
+### OpenClaw / 其他 AgentSkills-compatible 客户端
 
-Place `serenity-skill/` in the client’s skills directory. The package follows the standard `SKILL.md + references + assets + scripts` layout.
+把 `SKILL.md`、`LICENSE`、`references/`、`assets/`、`scripts/`、`examples/`、`agents/` 放进对应客户端的 `serenity-skill/` 目录即可。README 和项目维护文档只用于 GitHub 展示，不需要安装到运行目录。
 
-## Try It
+## 本地瓶颈打分
 
-```text
-Use serenity-skill to deeply research A-share AI semiconductor opportunities.
-Map the value chain, investigate current sources, rank the top research priorities,
-explain the evidence, and say what could prove each idea wrong.
-```
-
-```text
-Use serenity-skill to challenge this company's CPO supplier thesis.
-Where does it sit in the chain, what evidence supports it, and what would weaken the idea?
-```
-
-```text
-用 serenity-skill 深度调研现在 A 股 AI 半导体产业链，
-找 5 个最值得优先研究的标的，给出产业链位置、证据、排序理由和主要风险。
-```
-
-## Example Output Style
-
-The Skill aims for normal research-partner language:
-
-```text
-I would prioritize advanced packaging equipment, optical-interconnect upstream materials,
-and AI server power components. They sit closer to real expansion constraints than the
-obvious AI ticker basket.
-
-The first group ranks higher because capacity qualification and customer validation
-can take time, and public markets often recognize the downstream demand before they
-price the upstream constraint.
-
-The main thing that would weaken this view is simple: if customers can qualify alternate
-suppliers faster than expected, the scarce-layer logic fades.
-```
-
-Chinese outputs use the same style:
-
-```text
-我会优先看三层：先进封装设备、光通信上游材料、AI 服务器电源链。
-原因是它们更接近真实扩产约束，市场也更容易先定价下游故事，再回头找上游卡点。
-
-第一优先级要查的是客户认证和产能证据。故事之外还需要订单、认证、毛利率或收入结构变化，
-否则这个标的只能算线索。
-```
-
-## Local Scorecard
-
-Generate a template:
+生成模板：
 
 ```bash
 python scripts/serenity_scorecard.py --template > my-company.json
 ```
 
-Run a score:
+运行评分：
 
 ```bash
 python scripts/serenity_scorecard.py --format md my-company.json
 ```
 
-Validate the Skill package:
+校验 Skill：
 
 ```bash
 python scripts/validate_skill.py .
 ```
 
-## Repository Layout
+## 仓库结构
 
 ```text
 serenity-skill/
 ├── SKILL.md
 ├── README.md
+├── README.en.md
 ├── README.zh-CN.md
-├── LICENSE
-├── agents/
-│   └── openai.yaml
 ├── references/
 │   ├── deep-research-workflow.md
 │   ├── evidence-ladder.md
 │   ├── market-source-playbook.md
-│   ├── serenity-dialogue-protocol.md
-│   ├── output-style-and-language.md
 │   ├── public-profile-and-evaluation.md
-│   ├── research-sources.md
 │   └── risk-and-compliance.md
 ├── assets/
 │   ├── bottleneck-scorecard.json
@@ -170,11 +192,13 @@ serenity-skill/
     └── test-cases.md
 ```
 
-## Boundary
+## 研究边界
 
-This is an independent public-methodology project inspired by public Serenity / @aleabitoreddit research patterns. It supports research, ranking, and reasoning. It has zero broker access, zero wallet access, and zero trade execution.
+Serenity.skill 是独立的公开方法论项目，灵感来自 Serenity / `@aleabitoreddit` 公开内容中可观察到的研究范式。它帮助做研究、排序和推理，功能范围限于研究辅助。
 
-Company facts should come from filings, exchange documents, company announcements, transcripts, regulatory/project records, patents, standards, reputable media, and specialist analysis.
+它提供研究优先级、证据链、风险核验和下一步检查清单。交易执行、账户操作、收益承诺和最终买卖判断始终由用户自己控制。
+
+强结论应以公告、交易所文件、财报、电话会、监管/项目文件、专利、标准、可信媒体和专业分析为依据。社交媒体内容适合作为线索来源，最终判断要回到更强证据。
 
 ## License
 

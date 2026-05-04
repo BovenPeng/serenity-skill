@@ -4,7 +4,7 @@
 
 给它一个市场和方向，它会联网查资料、拆产业链、找供应链卡点、筛上市公司、给出优先研究排序，并说明这个判断最容易错在哪里。
 
-[English README](README.md)
+[English README](README.en.md)
 
 ```text
 市场故事 -> 系统变化 -> 必要零部件 -> 产业链层级
@@ -33,15 +33,17 @@ Serenity.skill 是一个给投资研究 Agent 用的 Skill。它的重点是让 
 用户级安装：
 
 ```bash
-mkdir -p ~/.agents/skills
-cp -R serenity-skill ~/.agents/skills/serenity-skill
+SKILL_DIR="$HOME/.agents/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
 项目级安装：
 
 ```bash
-mkdir -p .agents/skills
-cp -R serenity-skill .agents/skills/serenity-skill
+SKILL_DIR=".agents/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
 ### Claude Code
@@ -49,27 +51,30 @@ cp -R serenity-skill .agents/skills/serenity-skill
 用户级安装：
 
 ```bash
-mkdir -p ~/.claude/skills
-cp -R serenity-skill ~/.claude/skills/serenity-skill
+SKILL_DIR="$HOME/.claude/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
 项目级安装：
 
 ```bash
-mkdir -p .claude/skills
-cp -R serenity-skill .claude/skills/serenity-skill
+SKILL_DIR=".claude/skills/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
 ### Hermes Agent
 
 ```bash
-mkdir -p ~/.hermes/skills/research
-cp -R serenity-skill ~/.hermes/skills/research/serenity-skill
+SKILL_DIR="$HOME/.hermes/skills/research/serenity-skill"
+mkdir -p "$SKILL_DIR"
+cp -R SKILL.md LICENSE references assets scripts examples agents "$SKILL_DIR"/
 ```
 
 ### OpenClaw / 其他 AgentSkills-compatible 客户端
 
-把 `serenity-skill/` 放进对应客户端的 skills 目录即可。仓库结构是标准的 `SKILL.md + references + assets + scripts`。
+把 `SKILL.md`、`LICENSE`、`references/`、`assets/`、`scripts/`、`examples/`、`agents/` 放进对应客户端的 `serenity-skill/` 目录即可。README 和项目维护文档只用于 GitHub 展示，不需要安装到运行目录。
 
 ## 直接这样用
 
