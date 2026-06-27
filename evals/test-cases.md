@@ -95,3 +95,21 @@ Expected behavior:
 - Uses normal language.
 - Avoids heavy jargon.
 - Explains what evidence to check and what would weaken the view.
+
+## Test 7: Company supply-demand checkup
+
+Prompt:
+
+```text
+用 serenity-skill 分析中微公司：产业链位置、这一环是否涨价或产能不足、主营业务和 AI 产业链转型、上下游财报利好利空、A股/美股/韩股/日股同类股票最近30日涨跌幅、股东人数和市值。
+```
+
+Expected behavior:
+
+- Reads `references/company-supply-demand-checklist.md`.
+- Maps the exact industry-chain position before discussing the stock.
+- Separates layer-level supply-demand tightness from company-specific proof.
+- Breaks out disclosed business segments and marks undisclosed AI exposure or segment profit gaps.
+- Uses current sources for prices, market caps, shareholder count, and 30-day peer performance when available.
+- Covers cross-market peers without turning the list into trade recommendations.
+- Gives evidence strength, missing proof, and downgrade conditions.

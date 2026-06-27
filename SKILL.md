@@ -1,6 +1,6 @@
 ---
 name: serenity-skill
-description: Turn an investment agent into a supply-chain bottleneck hunter. Use this skill for source-backed investment research, live market/theme scans, AI/semi/technology value-chain mapping, A-share/HK/US stock screening, thesis stress tests, and Serenity-inspired research conversations. Trigger on requests like "用 Serenity 的方式看", "深度调研", "产业链/供应链/卡点/瓶颈", "A股 AI 半导体哪个最值得研究", "find unknown bottlenecks", "rank candidates", or "challenge this thesis". Outputs plain-language reasoning, ranked research priorities, evidence chains, risks, and next verification steps. Research support only; no trade execution.
+description: Turn an investment agent into a supply-chain bottleneck hunter. Use this skill for source-backed investment research, live market/theme scans, AI/semi/technology value-chain mapping, A-share/HK/US stock screening, company supply-demand checkups, revenue mix and AI-transition analysis, cross-market peer comparisons, thesis stress tests, and Serenity-inspired research conversations. Trigger on requests like "用 Serenity 的方式看", "深度调研", "产业链/供应链/卡点/瓶颈", "主营业务占比", "AI产业链转型", "上下游财报影响", "跨市场同类股票", "股东人数/流通市值/总市值", "A股 AI 半导体哪个最值得研究", "find unknown bottlenecks", "rank candidates", or "challenge this thesis". Outputs plain-language reasoning, ranked research priorities, evidence chains, risks, and next verification steps. Research support only; no trade execution.
 license: MIT
 compatibility: Agent Skills-compatible clients. Best with web/search, market-data, filing, browser, and optional python3 access. Bundled scripts are local-only.
 metadata:
@@ -44,7 +44,7 @@ For deep theme scans, avoid quick-answer behavior. When tools and runtime allow,
 Classify the request, then work in the matching mode.
 
 - **Theme scan**: The user gives a market and theme, such as A-share AI semiconductors, HK robotics, US AI power equipment, CPO, advanced packaging, glass substrates, HBM, silicon photonics, data-center power, robotics, biotech manufacturing, or defense electronics. Run the full research workflow and return priority candidates.
-- **Single-company challenge**: The user asks about one ticker/company. Determine the exact value-chain position, evidence quality, what the market may be missing, and what would make the idea weak.
+- **Single-company challenge**: The user asks about one ticker/company. Determine the exact value-chain position, evidence quality, what the market may be missing, and what would make the idea weak. If the request asks for supply-demand, pricing, capacity, expansion difficulty, revenue mix, AI-chain transition, upstream/downstream financial-report impact, cross-market peers, 30-day performance, shareholder count, float market cap, or total market cap, read `references/company-supply-demand-checklist.md`.
 - **Candidate comparison**: The user gives several companies. Compare them by chain position, evidence strength, scarcity, valuation pressure, timing, and risk.
 - **Research partner conversation**: The user wants to think, learn, or discuss. Ask tight questions and push the idea toward evidence, chain position, and failure conditions.
 - **Learning mode**: The user asks to learn the method. Ask one focused question per turn and walk from trend to system change to scarce layer to proof.
@@ -52,6 +52,8 @@ Classify the request, then work in the matching mode.
 ## Research workflow
 
 Run this workflow for theme scans, current opportunities, and candidate rankings.
+
+For single-company supply-demand checkups, use the core workflow below, then read `references/company-supply-demand-checklist.md` for the required company-specific sections and evidence path.
 
 1. **Set the scope**
    - Market: US, Hong Kong, A-share, Taiwan, Japan, Korea, Europe, global, or private-company map.
@@ -219,6 +221,7 @@ Read `references/risk-and-compliance.md` for high-risk situations.
 Load only what is needed:
 
 - `references/deep-research-workflow.md` — detailed workflow for source-backed theme scans.
+- `references/company-supply-demand-checklist.md` — single-company supply-demand, revenue mix, AI transition, upstream/downstream, peer performance, shareholder, and market-cap checklist.
 - `references/evidence-ladder.md` — source grading and evidence standards.
 - `references/market-source-playbook.md` — source paths by market.
 - `references/serenity-dialogue-protocol.md` — research partner and learning-mode behavior.

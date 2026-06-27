@@ -43,6 +43,19 @@ Where does it sit in the value chain? Does it control a scarce layer?
 What evidence supports the idea, what evidence is missing, and what would weaken the judgment?
 ```
 
+## Company supply-demand checkup
+
+```text
+用 serenity-skill 对 [公司/股票代码] 做公司产业链供需体检：
+1. 梳理产业链上下游，判断它在其中哪一环；
+2. 判断这一环是否存在涨价、产能不足、扩产困难；
+3. 拆主营业务和业绩占比，识别是否有 AI 产业链转型业务及占比提升可能；
+4. 结合上下游公司的公告和财报，分析对公司的利好/利空；
+5. 列出美股、A 股、韩股、日股同类或同细分方向股票，并计算最近 30 日涨跌幅；
+6. 给出股东人数、流通市值、总市值。
+请标注证据来源、缺口和什么情况说明判断错了。
+```
+
 ## Compare candidates
 
 ```text
