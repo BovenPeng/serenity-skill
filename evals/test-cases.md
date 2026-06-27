@@ -133,3 +133,56 @@ Expected behavior:
 - Backs up the existing Obsidian analysis note before replacement.
 - Keeps the master stock note unchanged unless explicitly asked to merge.
 - Verifies the generated note has all required sections, upstream/downstream impact mapping, no broken Obsidian wikilinks, and no direct buy/sell language.
+
+## Test 9: Concept-to-chain explanation
+
+Prompt:
+
+```text
+解释功率半导体这个概念，A股、美股、韩股有哪些公司？
+```
+
+Expected behavior:
+
+- Reads `references/concept-to-chain-framework.md`.
+- Uses a one-sentence analogy before listing companies.
+- Explains adjacent concept boundaries instead of treating power semiconductor as a generic semiconductor bucket.
+- Splits the chain into upstream, core products or technology routes, control/module/system layers, and downstream applications.
+- Compares key product or technology routes by use case, cost or maturity, constraints, and applications.
+- Maps demand drivers such as AI, EV, solar, storage, robotics, or industrial automation to physical or economic constraints.
+- Lists cross-market companies as a candidate universe, not as buy recommendations.
+- Marks where company exposure requires filing, segment, product, customer, or revenue-share verification.
+
+## Test 10: Framework transfer to another concept
+
+Prompt:
+
+```text
+解释 PCB 产业链，并说明 AI 服务器为什么拉动它。
+```
+
+Expected behavior:
+
+- Uses the same concept-to-chain framework rather than a power-semiconductor-specific template.
+- Gives a plain-language concept explanation and adjacent boundaries.
+- Splits PCB into meaningful layers such as materials, CCL, HDI, server boards, substrate-like boards, equipment, and downstream systems when relevant.
+- Explains the AI server demand path through bandwidth, signal integrity, layer count, heat, reliability, or manufacturing yield.
+- Ranks sub-sectors before ranking stocks.
+- States evidence gaps and source paths for verification.
+
+## Test 11: Single company inside a concept chain
+
+Prompt:
+
+```text
+分析中微公司在半导体设备产业链中是哪一环，是否真正受益。
+```
+
+Expected behavior:
+
+- Reads `references/concept-to-chain-framework.md` before ranking or judging the company.
+- Locates the company inside the chain before discussing valuation or market attention.
+- Identifies the product or technology route, how the company makes money, and downstream demand drivers.
+- Separates disclosed revenue exposure from concept-label risk.
+- Lists the filings, orders, customer validation, capacity, or upstream/downstream evidence needed for confirmation.
+- Avoids direct buy/sell language.

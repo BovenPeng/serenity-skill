@@ -43,6 +43,28 @@ Where does it sit in the value chain? Does it control a scarce layer?
 What evidence supports the idea, what evidence is missing, and what would weaken the judgment?
 ```
 
+## Concept to value chain
+
+```text
+用 serenity-skill 解释 [概念]：
+先用一句话讲清楚它是什么，再说明它和相邻概念的区别，按产业链拆成上游/核心产品/模块或系统/下游应用，比较关键产品或技术路线，解释 AI/EV/光伏/储能/机器人/工业自动化等需求为什么会拉动它，并列出 A股/美股或ADR/韩股/日股等相关公司候选 universe。
+最后先排细分赛道景气度，不要直接给买卖建议。功率半导体可以作为示例，但这个框架要能迁移到 PCB、光通信、半导体设备等概念。
+```
+
+## Company in concept chain
+
+```text
+用 serenity-skill 分析 [公司/股票代码] 在 [概念/产业链] 中是哪一环：
+判断它属于上游材料、设备、核心器件、模块、系统集成、下游客户还是仅主题相关；拆它靠什么业务赚钱，收入或利润是否真实暴露，受哪些需求拉动，需要哪些财报、公告、客户、订单或产能证据验证，以及什么情况说明这个概念暴露不成立。
+```
+
+## Sub-sector ranking
+
+```text
+用 serenity-skill 把 [概念] 的细分赛道按景气度排序：
+先拆技术路线和产业链层级，再按需求强度、供给扩张难度、客户认证、收入兑现、竞争格局、估值压力和失败条件排序。每层给代表公司候选和下一步验证证据。
+```
+
 ## Company supply-demand checkup
 
 ```text

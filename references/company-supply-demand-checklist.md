@@ -12,6 +12,8 @@ For a full company checkup, answer in these sections:
    - State the company's exact upstream/downstream position.
    - Name the scarce layer it controls, supplies, or only benefits from.
    - Link the position to customer capex, manufacturing process, component, material, equipment, software, or infrastructure constraints.
+   - If the request starts from a concept or theme, first use `references/concept-to-chain-framework.md` to identify the company's exact chain layer and product or technology route.
+   - Separate real business exposure from a loose concept label. State whether the company is a direct producer, upstream supplier, equipment/material vendor, module/system integrator, downstream customer, or only theme-adjacent.
 
 2. **供需与涨价/产能/扩产**
    - Check whether this layer shows price increases, tight capacity, long lead times, high utilization, customer prepayments, capacity reservations, order backlog, certification queues, permits, or specialized equipment bottlenecks.
@@ -23,6 +25,8 @@ For a full company checkup, answer in these sections:
    - If segment profit is not disclosed, state that and use revenue, gross margin, or qualitative disclosures instead.
    - Identify AI-chain exposure only when supported by filings, product disclosures, customers, or industry-chain logic.
    - Estimate whether the AI-related share can rise from demand-side pull and supply-side constraints. Label any estimate as qualitative unless a company disclosure gives numbers.
+   - When a concept has multiple product or technology routes, map each disclosed segment to the route it actually belongs to before discussing growth.
+   - Do not call a company a beneficiary only because the concept is hot. Confirm product fit, revenue exposure, customer adoption, qualification, orders, or segment guidance.
 
 4. **上下游财报影响**
    - Actively identify upstream supply-side companies and downstream demand-side companies from the target's filings, customer/supplier disclosures, industry-chain logic, and public peers.
