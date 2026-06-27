@@ -68,7 +68,7 @@ For a full company checkup, answer in these sections:
 - For upstream/downstream report impact, do real web/source fetching. Do not rely only on memory, industry common sense, or the target company's own statements. Cite the report or filing name, period, source URL, and publication date when available.
 - Customer and order claims require stronger proof than industry logic. Prefer signed-contract announcements, tender/winning-bid notices, official shipment or certification statements, named-customer filings, customer-side filings, and official IR answers. If only a research note, forum post, broker channel check, or unsourced media article mentions a customer or order, mark it `未证实`.
 - Use reputable market data for prices, market caps, shareholder data, and peer performance. Always state the source and date.
-- For A-share Tushare usage, keep requests small and read-only. Clear local proxy environment variables when proxy stability matters. If an IP or frequency limit occurs, wait 10 seconds and retry up to 5 times, then stop and label the missing data.
+- For A-share Tushare usage, keep requests small and read-only. Clear local proxy environment variables when proxy stability matters. If Tushare returns `IP 数量超限`, an IP/frequency-limit message, or a transient request failure, do not skip the data point immediately: sleep 45 seconds and retry, up to 5 total attempts. Only after 5 failed attempts should the run stop using that endpoint and label the missing data.
 - Never write secrets, API keys, tokens, private endpoints, or account identifiers into outputs.
 - Avoid direct buy/sell commands and guaranteed return language. Rank research priority only.
 
@@ -97,6 +97,7 @@ Use this workflow when the user explicitly asks to generate, replace, or rerun t
    - The script reads `MODELHUB_API_KEY` or `ASUKAQT_CODEX_MODELHUB_API_KEY` from the environment or local `~/.codex/.env`; never write the key into the repo, prompt files, notes, logs, or command output.
    - The script uses the Azure-style Chat Completions path: `/openai/deployments/{model}/chat/completions`.
    - Use `max_completion_tokens`, not `max_tokens`, for newer reasoning models that reject `max_tokens`.
+   - Prefer ModelHub API for note generation/replacement when the user requests it. If ModelHub has an HTTP error, timeout, empty response, or other transient API issue, sleep 45 seconds and retry, up to 5 total attempts, before falling back or marking the generation gap.
    - Disable proxy use for the ModelHub request unless the user's network requires it.
 
 3. **Replace safely**

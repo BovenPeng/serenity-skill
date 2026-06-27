@@ -114,6 +114,7 @@ Expected behavior:
 - Writes `未披露` for customer names, order quantity, or order amount that are absent from public filings/announcements/confirmed sources, and writes `未证实` for rumor or indirect inference.
 - Separates confirmed customers/orders from downstream proxy companies; does not turn wafer fabs, OEMs, hyperscalers, or peers into confirmed customers without named-source proof.
 - Uses current sources for prices, market caps, shareholder count, and 30-day peer performance when available.
+- If Tushare returns `IP 数量超限` or a frequency-limit message, does not skip immediately; sleeps 45 seconds and retries up to 5 total attempts before marking a data gap.
 - Fetches real upstream and downstream company reports or filings from the web, with at least two supply-side and two demand-side public companies when available.
 - Maps report signals such as capex, orders, inventory, gross margin, cash flow, guidance, and qualification progress back to the target as 利好/利空/中性/需核实.
 - Covers cross-market peers without turning the list into trade recommendations.
@@ -132,6 +133,7 @@ Expected behavior:
 - Reads `references/company-supply-demand-checklist.md`.
 - Builds or reuses a source-backed evidence note before calling ModelHub.
 - Uses ModelHub Chat Completions section by section, preferably through `scripts/modelhub_company_analysis.py`.
+- Prioritizes ModelHub API for generation; if the API returns HTTP errors, timeouts, empty content, or other transient failures, sleeps 45 seconds and retries up to 5 total attempts before falling back or marking the gap.
 - Does not write API keys, tokens, private endpoints, or raw auth output into the note or repo logs.
 - Backs up the existing Obsidian analysis note before replacement.
 - Keeps the master stock note unchanged unless explicitly asked to merge.
@@ -209,3 +211,20 @@ Expected behavior:
 - Does not identify SMIC, Hua Hong, Samsung, TSMC, Nvidia, or other downstream companies as confirmed customers unless a named public source supports it.
 - Distinguishes revenue, order amount, backlog, contract liabilities, installed base, shipment count, and capacity.
 - Gives exact evidence gaps and next verification sources instead of filling missing cells with guesses.
+
+## Test 13: Tushare and ModelHub retry policy
+
+Prompt:
+
+```text
+用 serenity-skill 通过 ModelHub API 更新中微公司的 Obsidian 笔记；行情和股东人数优先用 Tushare。如果 Tushare 显示“IP 数量超限”或者 ModelHub 接口报错，不许跳过。
+```
+
+Expected behavior:
+
+- Reads `references/company-supply-demand-checklist.md`.
+- Uses ModelHub API as the preferred generation path when a valid evidence pack and API key are available.
+- Uses 45-second retry sleeps and up to 5 total attempts for ModelHub HTTP errors, timeouts, empty content, or transient API failures.
+- For Tushare `IP 数量超限` or frequency-limit responses, sleeps 45 seconds and retries up to 5 total attempts before stopping that endpoint.
+- Does not silently downgrade to stale data or a non-ModelHub path without documenting the reason.
+- Keeps the Obsidian master stock note unchanged and writes rollback information for the generated analysis note.

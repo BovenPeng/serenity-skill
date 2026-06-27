@@ -22,6 +22,8 @@ import urllib.request
 DEFAULT_BASE_URL = "https://aidp.bytedance.net/api/modelhub/online/v2/crawl"
 DEFAULT_MODEL = "gpt-5.5-2026-04-24"
 DEFAULT_API_VERSION = "2024-03-01-preview"
+DEFAULT_RETRIES = 5
+DEFAULT_RETRY_SLEEP = 45.0
 
 SECTIONS = [
     ("1", "产业链位置"),
@@ -141,6 +143,11 @@ def chat_completion(
         except Exception as exc:  # noqa: BLE001 - CLI should report concise failure.
             last_error = f"{type(exc).__name__}: {exc}"
         if attempt < retries:
+            print(
+                f"ModelHub request attempt {attempt}/{retries} failed; "
+                f"sleeping {retry_sleep:g}s before retry.",
+                file=sys.stderr,
+            )
             time.sleep(retry_sleep)
 
     raise RuntimeError(f"ModelHub request failed after {retries} attempts: {last_error}")
@@ -241,7 +248,8 @@ ModelHub 调用：模型 `{model}`；逐节生成请求数 `{len(metas)}`；请�
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate a ModelHub-backed Serenity company analysis note."
+        description="Generate a ModelHub-backed Serenity company analysis note.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument("--company", default="中微公司")
     parser.add_argument("--ts-code", default="688012.SH")
@@ -250,8 +258,18 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--backup-dir", type=Path, default=None)
     parser.add_argument("--max-completion-tokens", type=int, default=2800)
-    parser.add_argument("--retries", type=int, default=3)
-    parser.add_argument("--retry-sleep", type=float, default=3.0)
+    parser.add_argument(
+        "--retries",
+        type=int,
+        default=DEFAULT_RETRIES,
+        help="Total attempts for each ModelHub section request.",
+    )
+    parser.add_argument(
+        "--retry-sleep",
+        type=float,
+        default=DEFAULT_RETRY_SLEEP,
+        help="Seconds to sleep between ModelHub retry attempts.",
+    )
     return parser.parse_args(argv)
 
 
