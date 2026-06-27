@@ -56,6 +56,13 @@ What evidence supports the idea, what evidence is missing, and what would weaken
 请标注证据来源、缺口和什么情况说明判断错了。
 ```
 
+## ModelHub generated company note
+
+```text
+用 serenity-skill 先完成 [公司/股票代码] 的公开证据包，然后通过 ModelHub API 逐节生成并替换 Obsidian 分析笔记。
+要求：覆盖产业链位置、供需和扩产、主营业务与 AI 链条、上下游财报影响、跨市场同类股票 30 日涨跌幅、股东人数/流通市值/总市值、结论与降级条件；覆盖前先备份旧笔记，不修改股票主档，不写入 API key。
+```
+
 ## Compare candidates
 
 ```text

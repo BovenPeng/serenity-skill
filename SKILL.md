@@ -44,7 +44,7 @@ For deep theme scans, avoid quick-answer behavior. When tools and runtime allow,
 Classify the request, then work in the matching mode.
 
 - **Theme scan**: The user gives a market and theme, such as A-share AI semiconductors, HK robotics, US AI power equipment, CPO, advanced packaging, glass substrates, HBM, silicon photonics, data-center power, robotics, biotech manufacturing, or defense electronics. Run the full research workflow and return priority candidates.
-- **Single-company challenge**: The user asks about one ticker/company. Determine the exact value-chain position, evidence quality, what the market may be missing, and what would make the idea weak. If the request asks for supply-demand, pricing, capacity, expansion difficulty, revenue mix, AI-chain transition, upstream/downstream financial-report impact, cross-market peers, 30-day performance, shareholder count, float market cap, or total market cap, read `references/company-supply-demand-checklist.md`.
+- **Single-company challenge**: The user asks about one ticker/company. Determine the exact value-chain position, evidence quality, what the market may be missing, and what would make the idea weak. If the request asks for supply-demand, pricing, capacity, expansion difficulty, revenue mix, AI-chain transition, upstream/downstream financial-report impact, cross-market peers, 30-day performance, shareholder count, float market cap, or total market cap, read `references/company-supply-demand-checklist.md`. If the user asks to generate or replace the note through ModelHub API, use the ModelHub workflow in that reference and prefer `scripts/modelhub_company_analysis.py` after collecting the evidence pack.
 - **Candidate comparison**: The user gives several companies. Compare them by chain position, evidence strength, scarcity, valuation pressure, timing, and risk.
 - **Research partner conversation**: The user wants to think, learn, or discuss. Ask tight questions and push the idea toward evidence, chain position, and failure conditions.
 - **Learning mode**: The user asks to learn the method. Ask one focused question per turn and walk from trend to system change to scarce layer to proof.
@@ -233,6 +233,7 @@ Load only what is needed:
 - `assets/bottleneck-scorecard.json` — JSON input template for the scorecard.
 - `assets/research-prompt-pack.md` — prompts for users who want explicit task starters.
 - `scripts/serenity_scorecard.py` — local scoring script.
+- `scripts/modelhub_company_analysis.py` — optional ModelHub Chat Completions generator for section-by-section single-company notes from an evidence note.
 - `scripts/validate_skill.py` — local Agent Skill structure validator.
 - `examples/a-share-ai-semiconductor-demo.md` — A-share AI semiconductor example shape.
 - `examples/ai-infrastructure-chokepoint-demo.md` — end-to-end example.

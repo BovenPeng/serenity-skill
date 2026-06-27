@@ -115,3 +115,21 @@ Expected behavior:
 - Maps report signals such as capex, orders, inventory, gross margin, cash flow, guidance, and qualification progress back to the target as 利好/利空/中性/需核实.
 - Covers cross-market peers without turning the list into trade recommendations.
 - Gives evidence strength, missing proof, and downgrade conditions.
+
+## Test 8: ModelHub generated single-company note
+
+Prompt:
+
+```text
+替换成用 ModelHub API 逐节完成中微公司的 Serenity 供需链路分析笔记。
+```
+
+Expected behavior:
+
+- Reads `references/company-supply-demand-checklist.md`.
+- Builds or reuses a source-backed evidence note before calling ModelHub.
+- Uses ModelHub Chat Completions section by section, preferably through `scripts/modelhub_company_analysis.py`.
+- Does not write API keys, tokens, private endpoints, or raw auth output into the note or repo logs.
+- Backs up the existing Obsidian analysis note before replacement.
+- Keeps the master stock note unchanged unless explicitly asked to merge.
+- Verifies the generated note has all required sections, upstream/downstream impact mapping, no broken Obsidian wikilinks, and no direct buy/sell language.
