@@ -1,6 +1,6 @@
 ---
 name: serenity-skill
-description: Turn an investment agent into a supply-chain bottleneck hunter. Use this skill for source-backed investment research, live market/theme scans, AI/semi/technology value-chain mapping, A-share/HK/US stock screening, thesis stress tests, and Serenity-inspired research conversations. Trigger on requests like "用 Serenity 的方式看", "深度调研", "产业链/供应链/卡点/瓶颈", "A股 AI 半导体哪个最值得研究", "find unknown bottlenecks", "rank candidates", or "challenge this thesis". Outputs plain-language reasoning, ranked research priorities, evidence chains, risks, and next verification steps. Research support only; no trade execution.
+description: Turn an investment agent into a supply-chain bottleneck hunter. Use this skill for source-backed investment research, live market/theme scans, concept explanation, concept-to-value-chain mapping, AI/semi/technology value-chain mapping, A-share/HK/US stock screening, company supply-demand checkups, revenue mix and AI-transition analysis, cross-market peer comparisons, thesis stress tests, and Serenity-inspired research conversations. Trigger on requests like "解释这个概念", "这个概念有哪些股票", "这家公司属于产业链哪一环", "这个细分赛道怎么拆", "用 Serenity 的方式看", "深度调研", "产业链/供应链/卡点/瓶颈", "主营业务占比", "AI产业链转型", "上下游财报影响", "跨市场同类股票", "股东人数/流通市值/总市值", "find unknown bottlenecks", "rank candidates", or "challenge this thesis". Outputs plain-language reasoning, ranked research priorities, evidence chains, risks, and next verification steps. Research support only; no trade execution.
 license: MIT
 compatibility: Agent Skills-compatible clients. Best with web/search, market-data, filing, browser, and optional python3 access. Bundled scripts are local-only.
 metadata:
@@ -43,8 +43,9 @@ For deep theme scans, avoid quick-answer behavior. When tools and runtime allow,
 
 Classify the request, then work in the matching mode.
 
-- **Theme scan**: The user gives a market and theme, such as A-share AI semiconductors, HK robotics, US AI power equipment, CPO, advanced packaging, glass substrates, HBM, silicon photonics, data-center power, robotics, biotech manufacturing, or defense electronics. Run the full research workflow and return priority candidates.
-- **Single-company challenge**: The user asks about one ticker/company. Determine the exact value-chain position, evidence quality, what the market may be missing, and what would make the idea weak.
+- **Concept-to-chain explanation**: The user asks what a concept means, which stocks belong to it, how a sub-sector splits, why a demand wave pulls it, or where a company sits in the chain. Read `references/concept-to-chain-framework.md`, explain the concept, map the chain, compare product/technology routes, list a candidate universe by market, rank sub-sectors before stocks, and mark evidence gaps.
+- **Theme scan**: The user gives a market and theme, such as A-share AI semiconductors, HK robotics, US AI power equipment, CPO, advanced packaging, glass substrates, HBM, silicon photonics, data-center power, robotics, biotech manufacturing, or defense electronics. If the concept is broad or blurry, first read `references/concept-to-chain-framework.md` and split the theme into investable layers; then run the full research workflow and return priority candidates.
+- **Single-company challenge**: The user asks about one ticker/company. Determine the exact value-chain position, evidence quality, what the market may be missing, and what would make the idea weak. If the question references a concept or asks which chain layer the company belongs to, read `references/concept-to-chain-framework.md` first and answer the company's layer, product/technology route, real revenue exposure, and concept-label risk. If the request asks for supply-demand, pricing, capacity, expansion difficulty, revenue mix, AI-chain transition, upstream/downstream financial-report impact, cross-market peers, 30-day performance, shareholder count, float market cap, or total market cap, also read `references/company-supply-demand-checklist.md`. If the user asks to generate or replace the note through ModelHub API, use the ModelHub workflow in that reference and prefer `scripts/modelhub_company_analysis.py` after collecting the evidence pack.
 - **Candidate comparison**: The user gives several companies. Compare them by chain position, evidence strength, scarcity, valuation pressure, timing, and risk.
 - **Research partner conversation**: The user wants to think, learn, or discuss. Ask tight questions and push the idea toward evidence, chain position, and failure conditions.
 - **Learning mode**: The user asks to learn the method. Ask one focused question per turn and walk from trend to system change to scarce layer to proof.
@@ -52,6 +53,10 @@ Classify the request, then work in the matching mode.
 ## Research workflow
 
 Run this workflow for theme scans, current opportunities, and candidate rankings.
+
+For concept explanations, related-stock maps, and "which chain layer is this company in" questions, read `references/concept-to-chain-framework.md` before ranking companies. The answer should explain the concept, split the chain, compare product or technology routes, connect demand drivers to physical constraints, then map companies as a candidate universe.
+
+For single-company supply-demand checkups, use the core workflow below, then read `references/company-supply-demand-checklist.md` for the required company-specific sections and evidence path.
 
 1. **Set the scope**
    - Market: US, Hong Kong, A-share, Taiwan, Japan, Korea, Europe, global, or private-company map.
@@ -219,6 +224,8 @@ Read `references/risk-and-compliance.md` for high-risk situations.
 Load only what is needed:
 
 - `references/deep-research-workflow.md` — detailed workflow for source-backed theme scans.
+- `references/concept-to-chain-framework.md` — reusable Q&A-style framework for explaining concepts, mapping value chains, comparing technology routes, listing cross-market candidate universes, and locating companies in a chain.
+- `references/company-supply-demand-checklist.md` — single-company supply-demand, revenue mix, AI transition, upstream/downstream, peer performance, shareholder, and market-cap checklist.
 - `references/evidence-ladder.md` — source grading and evidence standards.
 - `references/market-source-playbook.md` — source paths by market.
 - `references/serenity-dialogue-protocol.md` — research partner and learning-mode behavior.
@@ -230,6 +237,7 @@ Load only what is needed:
 - `assets/bottleneck-scorecard.json` — JSON input template for the scorecard.
 - `assets/research-prompt-pack.md` — prompts for users who want explicit task starters.
 - `scripts/serenity_scorecard.py` — local scoring script.
+- `scripts/modelhub_company_analysis.py` — optional ModelHub Chat Completions generator for section-by-section single-company notes from an evidence note.
 - `scripts/validate_skill.py` — local Agent Skill structure validator.
 - `examples/a-share-ai-semiconductor-demo.md` — A-share AI semiconductor example shape.
 - `examples/ai-infrastructure-chokepoint-demo.md` — end-to-end example.
