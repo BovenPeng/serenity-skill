@@ -1,6 +1,6 @@
 # Company Supply-Demand Checklist
 
-Use this file when a user asks for a single-company checkup that includes industry-chain position, supply-demand tightness, price increases, capacity shortages, expansion difficulty, revenue mix, AI-chain transition, upstream/downstream report impact, cross-market peers, recent performance, shareholder count, float market cap, or total market cap.
+Use this file when a user asks for a single-company checkup that includes industry-chain position, supply-demand tightness, price increases, capacity shortages, expansion difficulty, revenue mix, customers and orders by business line, AI-chain transition, upstream/downstream report impact, cross-market peers, recent performance, shareholder count, float market cap, or total market cap.
 
 Keep the analysis grounded in public evidence. Do not turn "AI exposure" or "scarce layer" into a conclusion unless filings, company disclosures, customer evidence, or reliable industry sources support it.
 
@@ -20,13 +20,24 @@ For a full company checkup, answer in these sections:
    - Separate layer-level tightness from company-specific proof.
    - State "未见强证据" when only the theme is strong but company-level proof is missing.
 
-3. **主营业务与 AI 产业链转型**
+3. **主营业务、客户与订单证据**
    - Break down revenue and profit by disclosed business segment.
+   - For each material segment or product line, include customers, order quantity, order amount, and evidence status when the user asks "客户是谁", "订单量", "订单金额", or similar.
+   - Only name customers or orders when supported by financial reports, exchange filings, official announcements, official IR records, tender/winning-bid documents, customer certifications, customer-side filings, or confirmed news.
+   - If a segment's customers, order quantity, or order amount are not publicly disclosed, write `未披露`; if the claim is rumored, inferred, or only from an unsourced channel check, write `未证实`.
+   - Do not turn downstream proxy companies into confirmed customers. A wafer fab, OEM, hyperscaler, or end-market company can be used as a `需求侧 proxy` only after it is clearly labeled as such.
+   - Do not treat phrases such as "头部客户", "国内外领先客户", or "主流晶圆厂" as named customers unless the source names them.
    - If segment profit is not disclosed, state that and use revenue, gross margin, or qualitative disclosures instead.
-   - Identify AI-chain exposure only when supported by filings, product disclosures, customers, or industry-chain logic.
+   - Identify AI-chain exposure only when supported by filings, product disclosures, customers, confirmed orders, or industry-chain logic.
    - Estimate whether the AI-related share can rise from demand-side pull and supply-side constraints. Label any estimate as qualitative unless a company disclosure gives numbers.
    - When a concept has multiple product or technology routes, map each disclosed segment to the route it actually belongs to before discussing growth.
    - Do not call a company a beneficiary only because the concept is hot. Confirm product fit, revenue exposure, customer adoption, qualification, orders, or segment guidance.
+
+   Recommended customer/order matrix:
+
+   | 业务/产品线 | 收入/占比 | 毛利/利润贡献 | 客户名称 | 订单量 | 订单金额 | 证据来源 | 证据状态/缺口 |
+   |---|---:|---:|---|---:|---:|---|---|
+   | Segment A | disclosed value or `未披露` | disclosed value or `未披露` | named customers or `未披露` | disclosed quantity or `未披露` | disclosed amount or `未披露` | filing/news/IR/tender | confirmed/gap |
 
 4. **上下游财报影响**
    - Actively identify upstream supply-side companies and downstream demand-side companies from the target's filings, customer/supplier disclosures, industry-chain logic, and public peers.
@@ -55,10 +66,22 @@ For a full company checkup, answer in these sections:
 
 - Prefer primary sources: filings, exchange announcements, company IR, earnings calls, product disclosures, tenders, permits, customer certification, patents, standards, and official project records.
 - For upstream/downstream report impact, do real web/source fetching. Do not rely only on memory, industry common sense, or the target company's own statements. Cite the report or filing name, period, source URL, and publication date when available.
+- Customer and order claims require stronger proof than industry logic. Prefer signed-contract announcements, tender/winning-bid notices, official shipment or certification statements, named-customer filings, customer-side filings, and official IR answers. If only a research note, forum post, broker channel check, or unsourced media article mentions a customer or order, mark it `未证实`.
 - Use reputable market data for prices, market caps, shareholder data, and peer performance. Always state the source and date.
 - For A-share Tushare usage, keep requests small and read-only. Clear local proxy environment variables when proxy stability matters. If an IP or frequency limit occurs, wait 10 seconds and retry up to 5 times, then stop and label the missing data.
 - Never write secrets, API keys, tokens, private endpoints, or account identifiers into outputs.
 - Avoid direct buy/sell commands and guaranteed return language. Rank research priority only.
+
+## Business Customer Order Workflow
+
+Use this workflow before writing conclusions when the request asks for "每块业务的客户是谁", "订单量", "订单金额", "客户结构", "订单结构", or similar:
+
+1. Build the disclosed segment list from the latest annual/interim report and reconcile it with current product names used in announcements, IR, and official website materials.
+2. For each segment, search the target company's filings, official announcements, exchange Q&A, investor presentations, and official website for named customers, orders, shipments, certifications, backlog, or contract liabilities.
+3. Search customer-side filings and tender/winning-bid sources for the same product line; only accept them as customer/order evidence when the target company is named.
+4. Record values exactly as disclosed. Distinguish revenue, order amount, contract liabilities, backlog, shipment count, installed base, capacity, and qualification progress; do not mix these concepts.
+5. Fill missing cells with `未披露` or `未证实`, then explain the missing evidence and the next source that would verify it.
+6. In the final answer, separate `已证实客户/订单` from `需求侧 proxy` and `行业推断`.
 
 ## ModelHub API Generation Workflow
 
@@ -66,7 +89,7 @@ Use this workflow when the user explicitly asks to generate, replace, or rerun t
 
 1. **Collect evidence first**
    - Finish the public-source evidence pack before calling ModelHub.
-   - Include target-company filings, upstream/downstream report extracts, peer performance, shareholder count, market cap, and explicit data gaps.
+   - Include target-company filings, the business-segment customer/order evidence matrix, upstream/downstream report extracts, peer performance, shareholder count, market cap, and explicit data gaps.
    - Do not ask ModelHub to invent or fetch facts that were not collected.
 
 2. **Call ModelHub section by section**
@@ -124,5 +147,6 @@ Use tables only when they improve comparison:
 
 - `问题 / 结论 / 证据强度 / 关键来源 / 待验证`
 - `业务 / 收入占比 / 毛利率或利润贡献 / AI 链条关系 / 趋势判断`
+- `业务/产品线 / 收入或占比 / 客户名称 / 订单量 / 订单金额 / 证据来源 / 证据状态或缺口`
 - `公司 / 上下游角色 / 最新报告 / 关键财报信号 / 对目标公司的影响 / 证据强度`
 - `市场 / 股票 / 业务相似度 / 30日涨跌幅 / 数据来源 / 备注`
