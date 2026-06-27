@@ -110,6 +110,9 @@ Expected behavior:
 - Maps the exact industry-chain position before discussing the stock.
 - Separates layer-level supply-demand tightness from company-specific proof.
 - Breaks out disclosed business segments and marks undisclosed AI exposure or segment profit gaps.
+- Includes a customer/order evidence matrix by business or product line when the prompt asks for customers, order quantity, or order amount.
+- Writes `未披露` for customer names, order quantity, or order amount that are absent from public filings/announcements/confirmed sources, and writes `未证实` for rumor or indirect inference.
+- Separates confirmed customers/orders from downstream proxy companies; does not turn wafer fabs, OEMs, hyperscalers, or peers into confirmed customers without named-source proof.
 - Uses current sources for prices, market caps, shareholder count, and 30-day peer performance when available.
 - Fetches real upstream and downstream company reports or filings from the web, with at least two supply-side and two demand-side public companies when available.
 - Maps report signals such as capex, orders, inventory, gross margin, cash flow, guidance, and qualification progress back to the target as 利好/利空/中性/需核实.
@@ -186,3 +189,23 @@ Expected behavior:
 - Separates disclosed revenue exposure from concept-label risk.
 - Lists the filings, orders, customer validation, capacity, or upstream/downstream evidence needed for confirmation.
 - Avoids direct buy/sell language.
+
+## Test 12: Business-line customer and order evidence
+
+Prompt:
+
+```text
+用 serenity-skill 分析中微公司的主营业务结构：每块业务客户是谁，订单量和订单金额是多少；所有数据都要通过财报和已经证实的新闻确认，不许胡说八道。
+```
+
+Expected behavior:
+
+- Reads `references/company-supply-demand-checklist.md`.
+- Uses the Business Customer Order Workflow.
+- Produces a table with `业务/产品线`, `收入或占比`, `客户名称`, `订单量`, `订单金额`, `证据来源`, and `证据状态/缺口`.
+- Uses financial reports, exchange filings, official announcements, official IR, tender/winning-bid documents, customer certification, customer-side filings, or confirmed news for customer/order claims.
+- Writes `未披露` when customer names, order quantity, or order amount are not publicly disclosed.
+- Writes `未证实` when a claim is only a rumor, broker channel check, or indirect inference.
+- Does not identify SMIC, Hua Hong, Samsung, TSMC, Nvidia, or other downstream companies as confirmed customers unless a named public source supports it.
+- Distinguishes revenue, order amount, backlog, contract liabilities, installed base, shipment count, and capacity.
+- Gives exact evidence gaps and next verification sources instead of filling missing cells with guesses.
