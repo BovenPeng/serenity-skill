@@ -75,6 +75,7 @@ What evidence supports the idea, what evidence is missing, and what would weaken
 4. 真实联网抓取供给侧和需求侧上下游公司的最新公告、年报、季报或业绩材料，提取 capex、订单、库存、毛利、现金流、指引等信号，并判断对公司的利好/利空/中性/需核实；
 5. 列出美股、A 股、韩股、日股同类或同细分方向股票，并计算最近 30 日涨跌幅；
 6. 给出股东人数、流通市值、总市值。
+如使用 Tushare 遇到“IP 数量超限”或频率限制，不要直接跳过；等待 45 秒后重试，最多 5 次，再标注缺口。
 请标注证据来源、缺口和什么情况说明判断错了。
 ```
 
@@ -91,7 +92,7 @@ What evidence supports the idea, what evidence is missing, and what would weaken
 
 ```text
 用 serenity-skill 先完成 [公司/股票代码] 的公开证据包，然后通过 ModelHub API 逐节生成并替换 Obsidian 分析笔记。
-要求：覆盖产业链位置、供需和扩产、主营业务与 AI 链条、上下游财报影响、跨市场同类股票 30 日涨跌幅、股东人数/流通市值/总市值、结论与降级条件；覆盖前先备份旧笔记，不修改股票主档，不写入 API key。
+要求：优先使用 ModelHub API；如果 API 报错、超时或返回空内容，等待 45 秒后重试，最多 5 次。覆盖产业链位置、供需和扩产、主营业务客户与订单证据、上下游财报影响、跨市场同类股票 30 日涨跌幅、股东人数/流通市值/总市值、结论与降级条件；覆盖前先备份旧笔记，不修改股票主档，不写入 API key。
 ```
 
 ## Compare candidates
