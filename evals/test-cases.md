@@ -111,5 +111,7 @@ Expected behavior:
 - Separates layer-level supply-demand tightness from company-specific proof.
 - Breaks out disclosed business segments and marks undisclosed AI exposure or segment profit gaps.
 - Uses current sources for prices, market caps, shareholder count, and 30-day peer performance when available.
+- Fetches real upstream and downstream company reports or filings from the web, with at least two supply-side and two demand-side public companies when available.
+- Maps report signals such as capex, orders, inventory, gross margin, cash flow, guidance, and qualification progress back to the target as 利好/利空/中性/需核实.
 - Covers cross-market peers without turning the list into trade recommendations.
 - Gives evidence strength, missing proof, and downgrade conditions.

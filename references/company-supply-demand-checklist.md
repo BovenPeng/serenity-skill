@@ -25,10 +25,12 @@ For a full company checkup, answer in these sections:
    - Estimate whether the AI-related share can rise from demand-side pull and supply-side constraints. Label any estimate as qualitative unless a company disclosure gives numbers.
 
 4. **上下游财报影响**
-   - Check upstream suppliers and downstream customers when public peers exist.
-   - Look for positive signals: capex expansion, order backlog, utilization, pricing, gross margin, inventory digestion, cash conversion, or customer qualification progress.
-   - Look for negative signals: order cuts, margin pressure, slower capex, inventory build, receivable stress, weak operating cash flow, delays, or substitute technologies.
-   - Explain how those signals help or hurt the target company.
+   - Actively identify upstream supply-side companies and downstream demand-side companies from the target's filings, customer/supplier disclosures, industry-chain logic, and public peers.
+   - Fetch current public filings or reports from the web for those companies. Use annual reports, interim reports, quarterly reports, earnings releases, exchange announcements, SEC 10-K/10-Q/8-K, HKEX filings, TDnet materials, DART filings, company IR decks, transcripts, or official press releases.
+   - Minimum standard: check at least two supply-side and two demand-side public companies when the chain has available listed companies. If fewer are available or sources cannot be fetched, state the exact gap.
+   - Extract report signals that can affect the target company: capex expansion, order backlog, utilization, pricing, gross margin, inventory digestion, cash conversion, customer qualification progress, purchasing cadence, supplier lead time, and segment guidance.
+   - Look for negative signals: order cuts, margin pressure, slower capex, inventory build, receivable stress, weak operating cash flow, delivery delays, substitute technologies, or customers reducing tool spend.
+   - Map every upstream/downstream signal back to the target as `利好`, `利空`, `中性`, or `需核实`; do not leave the report facts as an unconnected news list.
 
 5. **跨市场同类股票与近期表现**
    - Build peers from the same or closest segment across A-shares, US, Japan, Korea, and other relevant markets.
@@ -48,10 +50,42 @@ For a full company checkup, answer in these sections:
 ## Evidence And Data Rules
 
 - Prefer primary sources: filings, exchange announcements, company IR, earnings calls, product disclosures, tenders, permits, customer certification, patents, standards, and official project records.
+- For upstream/downstream report impact, do real web/source fetching. Do not rely only on memory, industry common sense, or the target company's own statements. Cite the report or filing name, period, source URL, and publication date when available.
 - Use reputable market data for prices, market caps, shareholder data, and peer performance. Always state the source and date.
 - For A-share Tushare usage, keep requests small and read-only. Clear local proxy environment variables when proxy stability matters. If an IP or frequency limit occurs, wait 10 seconds and retry up to 5 times, then stop and label the missing data.
 - Never write secrets, API keys, tokens, private endpoints, or account identifiers into outputs.
 - Avoid direct buy/sell commands and guaranteed return language. Rank research priority only.
+
+## Upstream And Downstream Report Workflow
+
+Use this workflow inside the `上下游财报影响` section:
+
+1. **Build the chain sample**
+   - Start from the target's disclosed customers, suppliers, related parties, product categories, and industry peers.
+   - If exact customers or suppliers are not disclosed, use listed companies in the closest demand-side and supply-side layers, and label them as "proxy peers".
+   - Keep the sample small and explainable: usually 2-4 supply-side names and 2-4 demand-side names.
+
+2. **Fetch filings and reports**
+   - A-shares: use SSE/SZSE/CNINFO announcements, annual/interim/quarterly reports, exchange Q&A, and company IR.
+   - US: use SEC 10-K, 10-Q, 8-K, earnings releases, transcripts, and investor presentations.
+   - Hong Kong: use HKEX filings, annual/interim reports, placings, and connected transactions.
+   - Japan: use TDnet, company earnings materials, integrated reports, and segment disclosures.
+   - Korea: use DART filings, company IR, export/customer ecosystem disclosures, and earnings materials.
+
+3. **Extract comparable signals**
+   - Demand-side customers: capex, fab/plant expansion, tool spend, utilization, production ramps, inventory, backlog, and guidance.
+   - Supply-side suppliers: input cost, lead time, delivery capacity, gross margin, quality/certification, inventory, and production bottlenecks.
+   - Same-layer peers: revenue growth, order backlog, margins, customer validation, and segment comments that confirm or contradict the target's story.
+
+4. **Translate to impact**
+   - `利好`: customer capex/order growth, supplier capacity stabilization, peer confirmation, higher utilization, repeated orders, or cash conversion improving.
+   - `利空`: customer capex cuts, inventory digestion pressure, supplier delays or cost inflation, margin compression, slower tool qualification, or substitute technology.
+   - `中性`: mixed reports or signals that affect the industry but not the target's exact layer.
+   - `需核实`: source is weak, proxy is distant, or the report lacks a direct link to the target's products.
+
+5. **Show the evidence**
+   - Include a compact table with `公司 / 上下游角色 / 最新报告 / 关键财报信号 / 对目标公司的影响 / 证据强度`.
+   - Follow with a short synthesis: what the upstream and downstream reports collectively say about the target's demand, pricing power, delivery risk, and margin risk.
 
 ## Compact Table Suggestions
 
@@ -59,4 +93,5 @@ Use tables only when they improve comparison:
 
 - `问题 / 结论 / 证据强度 / 关键来源 / 待验证`
 - `业务 / 收入占比 / 毛利率或利润贡献 / AI 链条关系 / 趋势判断`
+- `公司 / 上下游角色 / 最新报告 / 关键财报信号 / 对目标公司的影响 / 证据强度`
 - `市场 / 股票 / 业务相似度 / 30日涨跌幅 / 数据来源 / 备注`

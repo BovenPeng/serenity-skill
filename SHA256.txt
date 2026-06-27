@@ -8,14 +8,14 @@ b45921275c565219ff05d68a14e1082aded7b1486042081a74a29d808261f46b  ./CONTRIBUTING
 aa2e5bd945639ac872642da68055a150436e9282c2a207cc2c6368b956d64d01  ./SKILL.md
 419081882ee6bcdc1bf8a5c3bd8eb86fe3cf990c7b1af76e0b95de13a8a669c1  ./agents/openai.yaml
 a491c3a672c0d8e348a1ec36f99a5d9bd4336d9e0a5f6eb605d1c8ab5845b402  ./assets/bottleneck-scorecard.json
-8d19de18505254422e4b10c3086b07b035fc390e6d6fa9f769aa8c583b55268e  ./assets/research-prompt-pack.md
+7be04f586b5d6f81d9e2df2d6a605176c10876e976449089af647f43ce664060  ./assets/research-prompt-pack.md
 19c8eaa028c06d3da31d855c3a7b331478d0fedc7ab23b992bff65a09c5f972a  ./assets/thesis-template.md
-d880aaeadbfc19e36c6a0c98c93ecc5958eb5ffd48592e6e0ff9a3989159eb83  ./evals/test-cases.md
+207774be044e2c57981a0ab807167f67505739f6ab0dc34695bba7aa32947e98  ./evals/test-cases.md
 3698195a505a5407ebd2f41b6ce35bf49484032add2ef86bf5399d704dcf171e  ./examples/a-share-ai-semiconductor-demo.md
 1800dc18168256b9e833a3f08bf60390590ed27dacea0017d5e4874ee4a90fec  ./examples/ai-infrastructure-chokepoint-demo.md
 c36a848f64563cd981fdc0a1584fd6b2bd8be10eda3a5787ae54e0df04e874db  ./examples/demo-conversation.md
 1aa25250ea5147de480ddec36a40f9e8df0c78e3e13b4dbe2ba30c86d0c1b0dc  ./references/deep-research-workflow.md
-c4a34c9a70536a32fb9b82c158e9711142e2aadcfb1b7de8b5ea2a9d191dc700  ./references/company-supply-demand-checklist.md
+da701dd08be7da1ccf0fade2f584371c71ecc840f3ce47eac9c4fc4a17b7a862  ./references/company-supply-demand-checklist.md
 12e01e97bf2f7ef639a0bd21bea6b030b3def9a8840a1551ac157743f65e2d57  ./references/evidence-ladder.md
 23593bf57d8c6750961525b1ac684e3380fc12902fbde4fc1fd32831aa36f3a4  ./references/market-source-playbook.md
 bb0310212affd1376f933aa942709c8da20a315a5d7881ff87af8ff280abff3a  ./references/output-style-and-language.md
